@@ -1,0 +1,16 @@
+{
+    "menu": [
+        {
+            "name": "Dashboards",
+            "icon": "menu-icon tf-icons ti ti-smart-home",
+            "slug": "dashboard",
+            "url": "admin/dashboard"
+        },
+        {
+            "name": "Document",
+            "icon": "fa fa-file mr-2",
+            "slug": "document",
+            "url": "admin/document"
+        }
+    ]
+}

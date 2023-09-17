@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminCT;
+use App\Http\Controllers\AuthCT;
+use App\Http\Controllers\DocumentApiCT;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login/action', [AuthCT::class, 'loginActionApi']);
+Route::post('register/action', [AuthCT::class, 'registerActionApi']);
+
+Route::middleware(['jwt.verify'])->group(function () {
+    Route::get('admin/my-profile', [AdminCT::class, 'myProfileApi']);
+    Route::post('admin/my-profile/action', [AdminCT::class, 'myProfileActionApi']);
+    Route::resource('admin/document', DocumentApiCT::class);
+
+    Route::post('admin/document/send-email/{id}', [DocumentApiCT::class, 'send_email_action']);
+    Route::get('logout', [AuthCT::class, 'logoutApi']);
 });
